@@ -87,7 +87,7 @@ const AllItems = () => {
         <tbody>
           {items.map((item, i) => {
             return (
-              <tr key={item.item} className="border-white border-2">
+              <tr key={item._id} className="border-white border-2">
                 <th className="border-white border-2">{item.discordHandle}</th>
                 <th className="border-white border-2">{item.item}</th>
                 <th className="border-white border-2">{item.purchasePrice}</th>

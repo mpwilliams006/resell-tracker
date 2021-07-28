@@ -25,7 +25,7 @@ const SignIn = () => {
         console.log(response); // JSON data parsed by `data.json()` call
         useGlobalState.updateState({ user: response.data.user })
       }).then(() => {
-        history.push('/');
+        history.push('/all-items');
       });
   };
 

@@ -13,7 +13,6 @@ const GlobalStateContextProvider = ({ children }) => {
     initialGlobalState
   );
 
-
   const setStateHandler = (newState) => {
     setState((prevState) => ({ ...prevState, ...newState }));
   }

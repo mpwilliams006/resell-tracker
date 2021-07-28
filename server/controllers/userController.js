@@ -63,6 +63,27 @@ exports.addItem = catchAsync(async (req, res, next) => {
     }
   });
 });
+exports.updateItemById = catchAsync(async (req, res, next) => {
+  const user = await User.update({ "_id": req.body.id, "items._id": req.body.itemid }, {
+    $set:
+    {
+      "items.$.item": req.body.item, "items.$.purchasePrice": req.body.purchasePrice, "items.$.quantity": req.body.quantity,
+      "items.$.soldPrice": req.body.soldPrice, "items.$.datePurchased": req.body.datePurchased, "items.$.categories": req.body.categories,
+      "items.$.dateSold": req.body.dateSold, "items.$.datePurchased": req.body.datePurchased, "items.$.categories": req.body.categories
+    }
+  });
+
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user
+    }
+  });
+});
 exports.getAllItems = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(User.find({ "items.0": { "$exists": true } }), req.query)
     .filter()
@@ -80,6 +101,39 @@ exports.getAllItems = catchAsync(async (req, res, next) => {
         items
       }
     });
+});
+exports.updateItem = catchAsync(async (req, res, next) => {
+  const features = new APIFeatures(User.find({ "items.0": { "$exists": true } }), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+  const items = await features.query;
+
+  // SEND RESPONSE
+  res.status(200)
+    .json({
+      status: 'success',
+      results: items.length,
+      data: {
+        items
+      }
+    });
+});
+exports.getMyItems = catchAsync(async (req, res, next) => {
+  const listings = await User.findById(req.params.id, 'items');
+  // Tour.findOne({ _id: req.params.id })
+
+  if (!listings) {
+    return next(new AppError('No food listings', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      listings
+    }
+  });
 });
 
 const createSendToken = (user, statusCode, res) => {

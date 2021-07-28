@@ -3,22 +3,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-type Inputs = {
-  item: string,
-  userId: Number,
-  datePurchased: Date,
-  dateSold: Date,
-  quantity: Number,
-  purchasePrice: Number,
-  soldPrice: Number,
-  categories: [String]
-};
-
-const AddItem: FC<Inputs> = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+const AddItem = () => {
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const history = useHistory();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit = (data) => {
     postData('http://localhost:3000/api/v1/users/items', data)
       .then(response => {
         console.log(response);

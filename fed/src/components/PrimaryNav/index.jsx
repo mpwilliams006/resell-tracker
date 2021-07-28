@@ -56,12 +56,14 @@ const HamburgerNavContainer = ({ currentNavItems, setCurrentNavItems, prevNavIte
 }
 
 const PrimaryNav = () => {
+  const useGlobalState = React.useContext(GlobalStateContext);
   const [navItems, setNavItems] = useState(data);
   const [mobileNav, setMobileNav] = useState(false);
   const [currentNavItems, setCurrentNavItems] = useState(navItems);
   const [prevNavItems, setPrevNavItems] = useState([]);
   const homeAnchor = { href: "/signin", text: 'Sign In' };
-  const useGlobalState = React.useContext(GlobalStateContext);
+  const myItems = { href: "/my-items", text: useGlobalState.state.user.discordHandle };
+
   //Our button can take an href or a clickEvent attribute
   const opts = {};
   opts['href'] = '/signup';
@@ -77,7 +79,6 @@ const PrimaryNav = () => {
       <nav className="w-11/12 mx-auto flex items-center">
         <div className="w-1/6">
           <Logo className="w-24 App-logo" logo={logo}></Logo>
-          {JSON.stringify(useGlobalState.state)}
         </div>
 
         <div className="w-3/4">
@@ -87,8 +88,9 @@ const PrimaryNav = () => {
         </div>
 
         <div className="w-1/4 hidden lg:inline-block">
-          <Anchor {...homeAnchor}></Anchor>
-          <Button className="hover:bg-purple-900 py-3 px-4 text-base bg-purple-500" {...opts} text='Sign Up'></Button>
+          {useGlobalState.state.user.discordHandle === undefined && <Anchor {...homeAnchor}></Anchor>}
+          {useGlobalState.state.user.discordHandle === undefined && <Button className="hover:bg-purple-900 py-3 px-4 text-base bg-purple-500" {...opts} text='Sign Up'></Button>}
+          {useGlobalState.state.user.discordHandle != undefined && <Anchor className="text-white" {...myItems}></Anchor>}
         </div>
 
         <div onClick={handleClick} className="lg:hidden flex justify-end w-1/4 pr-4">

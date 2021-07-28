@@ -15,6 +15,23 @@ router
   .route('/items')
   .get(authController.protect, userController.getAllItems)
   .patch(userController.updateUser)
+  .put(authController.protect, userController.updateItemById)
+  .post(authController.protect, userController.addItem)
+  .delete(userController.deleteUser);
+
+router
+  .route('/myitems/:id')
+  .get(authController.protect, userController.getMyItems)
+  .put(authController.protect, userController.updateItemById)
+  .patch(userController.updateUser)
+  .post(authController.protect, userController.addItem)
+  .delete(userController.deleteUser);
+
+router
+  .route('/myitem/:userid/:itemid')
+  .get(authController.protect, userController.getMyItems)
+  .put(authController.protect, userController.updateItemById)
+  .patch(userController.updateUser)
   .post(authController.protect, userController.addItem)
   .delete(userController.deleteUser);
 

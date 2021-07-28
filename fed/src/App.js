@@ -6,7 +6,9 @@ import SignIn from './components/SignIn';
 import AddItem from './components/AddItem';
 import AllItems from './components/AllItems';
 import PrimaryNav from './components/PrimaryNav';
+import MyItems from './components/MyItems';
 import IsAuthenticated from './auth-context';
+import GlobalStateContextProvider from './../src/components/State'
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Switch, Route, useHistory, Redirect } from 'react-router-dom';
 
@@ -29,48 +31,53 @@ function App() {
   }
 
   return (
-    <Router>
-      <div className="App">
-        <header className="App-header">
-          <PrimaryNav></PrimaryNav>
-          <Switch>
-            <Route exact path="/" render={props => (
-              <>
-                TEST
+    <GlobalStateContextProvider>
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <PrimaryNav></PrimaryNav>
+            <Switch>
+              <Route exact path="/" render={props => (
+                <>
+                  TEST
               </>
-            )} />
-            <PrivateRoute exact component={AddItem} path="/add-item" render={props => (
-              <>
-                <AddItem></AddItem>
-              </>
-            )} />
-            <PrivateRoute exact component={AllItems} path="/all-items" render={props => (
-              <AllItems></AllItems>
-            )} />
-            <Route exact path="/signin" render={() => (
-              <>
-                <SignIn></SignIn>
-              </>
-            )} />
-            <Route exact path="/signup" render={() => (
-              <>
-                <SignUp></SignUp>
-              </>
-            )} />
-            <Route exact path="/sneakers" render={props => (
-              <>
+              )} />
+              <PrivateRoute exact component={AddItem} path="/add-item" render={props => (
+                <>
+                  <AddItem></AddItem>
+                </>
+              )} />
+              <PrivateRoute exact component={AllItems} path="/all-items" render={props => (
+                <AllItems></AllItems>
+              )} />
+              <PrivateRoute exact component={MyItems} path="/my-items" render={props => (
+                <MyItems></MyItems>
+              )} />
+              <Route exact path="/signin" render={() => (
+                <>
+                  <SignIn></SignIn>
+                </>
+              )} />
+              <Route exact path="/signup" render={() => (
+                <>
+                  <SignUp></SignUp>
+                </>
+              )} />
+              <Route exact path="/sneakers" render={props => (
+                <>
 
-              </>
-            )} />
-            <Route exact path="/lightning" render={props => (
-              <>
+                </>
+              )} />
+              <Route exact path="/lightning" render={props => (
+                <>
 
-              </>
-            )} />
-          </Switch>
-        </header>
-      </div>
-    </Router >
+                </>
+              )} />
+            </Switch>
+          </header>
+        </div>
+      </Router >
+    </GlobalStateContextProvider>
   );
 }
 

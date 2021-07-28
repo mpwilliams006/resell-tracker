@@ -24,8 +24,8 @@ const userSchema = new mongoose.Schema({
       item: {
         type: String
       },
-      datePurchased: Date,
-      dateSold: Date,
+      datePurchased: String,
+      dateSold: String,
       quantity: {
         type: Number,
         // required: [true, 'Please tell us your name!']
