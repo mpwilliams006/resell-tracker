@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useForm, SubmitHandler } from "react-hook-form";
 import dayjs from 'dayjs';
+import DatePicker from 'react-datepicker'
 
 const MyItems = () => {
 
@@ -52,6 +53,7 @@ const MyItems = () => {
   }
 
   const onSubmit = (data) => {
+    console.log(data);
     postData('http://localhost:3000/api/v1/users/items', data)
       .then(response => {
         console.log(response);
@@ -89,13 +91,13 @@ const MyItems = () => {
 
         <div className="flex flex-col w-32">
           <label className="text-sm">Price</label>
-          <div className="border-2 border-black"><input className="text-black mb-12 w-32" defaultValue={item.purchasePrice} {...register("purchasePrice")} /></div>
+          <div className="border-2 border-black"><input className="text-black mb-12 w-32" defaultValue={item.purchasePrice} {...register('purchasePrice', { type: 'number' })} /></div>
         </div>
         <input type="hidden" value={Cookies.get('id')} {...register("id")} />
         <input type="hidden" value={item._id} {...register("itemid")} />
         <div className="flex flex-col w-32">
           <label className="text-sm">Sold Price</label>
-          <div className="border-2 border-black  w-32"><input className="text-black mb-12  w-32" defaultValue={item.soldPrice} {...register("soldPrice")} /></div>
+          <div className="border-2 border-black  w-32"><input className="text-black mb-12  w-32" defaultValue={item.soldPrice} {...register('soldPrice', { type: 'number' })} /></div>
         </div>
         <div className="flex flex-col w-32">
           <label className="text-sm">Purchase Date</label>
@@ -107,7 +109,7 @@ const MyItems = () => {
         </div>
         <div className="flex flex-col w-24">
           <label className="text-sm">Quantity</label>
-          <div className="border-2 border-black "><input className="text-black mb-12 w-24" defaultValue={item.quantity} {...register("quantity")} /></div>
+          <div className="border-2 border-black "><input className="text-black mb-12 w-24" defaultValue={item.quantity} {...register('soldPrice', { type: 'number' })} /></div>
         </div>
         <div className="flex flex-col">
           <label className="text-sm">Categories</label>

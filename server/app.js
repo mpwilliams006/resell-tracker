@@ -68,8 +68,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect

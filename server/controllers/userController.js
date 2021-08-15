@@ -64,15 +64,16 @@ exports.addItem = catchAsync(async (req, res, next) => {
   });
 });
 exports.updateItemById = catchAsync(async (req, res, next) => {
-  const user = await User.update({ "_id": req.body.id, "items._id": req.body.itemid }, {
+  const user = await User.updateOne({ "_id": req.body.id, "items._id": req.body.itemId }, {
     $set:
     {
       "items.$.item": req.body.item, "items.$.purchasePrice": req.body.purchasePrice, "items.$.quantity": req.body.quantity,
       "items.$.soldPrice": req.body.soldPrice, "items.$.datePurchased": req.body.datePurchased, "items.$.categories": req.body.categories,
       "items.$.dateSold": req.body.dateSold, "items.$.datePurchased": req.body.datePurchased, "items.$.categories": req.body.categories
+
     }
   });
-
+  console.log(req.body.purchasePrice);
   if (!user) {
     return next(new AppError('No user found with that ID', 404));
   }
@@ -109,7 +110,7 @@ exports.updateItem = catchAsync(async (req, res, next) => {
     .limitFields()
     .paginate();
   const items = await features.query;
-
+  console.log(items);
   // SEND RESPONSE
   res.status(200)
     .json({
@@ -123,7 +124,7 @@ exports.updateItem = catchAsync(async (req, res, next) => {
 exports.getMyItems = catchAsync(async (req, res, next) => {
   const listings = await User.findById(req.params.id, 'items');
   // Tour.findOne({ _id: req.params.id })
-
+  console.log(listings);
   if (!listings) {
     return next(new AppError('No food listings', 404));
   }
@@ -134,6 +135,20 @@ exports.getMyItems = catchAsync(async (req, res, next) => {
       listings
     }
   });
+});
+exports.deleteItem = catchAsync(async (req, res, next) => {
+
+  const item = await User.findByIdAndUpdate(req.body.userId,
+    { $pull: { items: { _id: req.body._id } } },
+    { new: true, useFindAndModify: false },
+    function (err, data) {
+      if (err) {
+        res.send(err)
+      } else {
+        res.send(data.items)
+      }
+    }
+  );
 });
 
 const createSendToken = (user, statusCode, res) => {

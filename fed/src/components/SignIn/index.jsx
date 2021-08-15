@@ -52,7 +52,7 @@ const SignIn = () => {
     <form className="flex flex-col w-1/2 mx-auto" onSubmit={handleSubmit(onSubmit)}>
       {/* register your input into the hook by invoking the "register" function */}
       <label>Email</label>
-      <input className="text-black mb-12" defaultValue="test" {...register("email")} />
+      <input className="text-black mb-12" defaultValue="test" {...register('email', { type: 'string' })} />
       <label>Password</label>
       {/* include validation with required or other standard HTML validation rules */}
       <input className="text-black mb-12 " {...register("password", { required: true })} />

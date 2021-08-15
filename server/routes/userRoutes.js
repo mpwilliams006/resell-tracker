@@ -17,7 +17,7 @@ router
   .patch(userController.updateUser)
   .put(authController.protect, userController.updateItemById)
   .post(authController.protect, userController.addItem)
-  .delete(userController.deleteUser);
+  .delete(userController.deleteItem);
 
 router
   .route('/myitems/:id')

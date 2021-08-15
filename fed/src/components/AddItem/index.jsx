@@ -39,20 +39,20 @@ const AddItem = () => {
     <form className="flex flex-col w-1/2 mx-auto" onSubmit={handleSubmit(onSubmit)}>
       {/* register your input into the hook by invoking the "register" function */}
       <label>Item</label>
-      <input className="text-black mb-12" defaultValue="Bigtom" {...register("item")} />
+      <input className="text-black mb-12" {...register("item")} />
       <input className="text-black mb-12" type="hidden" value={Cookies.get('id')} defaultValue="Bigtom" {...register("userId")} />
       <label>Quantity</label>
-      <input className="text-black mb-12" defaultValue="bigtom@gmail.com" {...register("quantity")} />
+      <input className="text-black mb-12" type="number" defaultValue="1" {...register("quantity")} />
       <label>Date Purchased</label>
-      <input className="text-black mb-12" defaultValue="test1234" {...register("datePurchased")} />
+      <input className="text-black mb-12" placeholder="mm/dd/yyyy" {...register("datePurchased")} />
       <label>Date Sold</label>
-      <input className="text-black mb-12" defaultValue="test1234" {...register("dateSold")} />
+      <input className="text-black mb-12" placeholder="mm/dd/yyyy"  {...register("dateSold")} />
       <label>Purchase Price</label>
-      <input className="text-black mb-12" defaultValue="bigtom@gmail.com" {...register("purchasePrice")} />
+      <input className="text-black mb-12" type="number" {...register("purchasePrice")} />
       <label>Sold Price</label>
-      <input className="text-black mb-12" defaultValue="test1234" {...register("soldPrice")} />
+      <input className="text-black mb-12" type="number" {...register("soldPrice")} />
       <label>Categories</label>
-      <input className="text-black mb-12" defaultValue="test1234" {...register("categories")} />
+      <input className="text-black mb-12" placeholder="item, item, item" {...register("categories")} />
       {/* include validation with required or other standard HTML validation rules */}
       <input className="hover:bg-purple-900 py-3 px-4 text-base bg-purple-500 cursor-pointer" type="submit" />
       {/* errors will return when field validation fails  */}
