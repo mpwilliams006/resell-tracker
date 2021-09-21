@@ -51,7 +51,6 @@ const Dashboard = ({ purchases }: PurchaseProps) => {
         <span>Profits</span>
         <div>${profits}</div>
       </div>
-
     </div>
   );
 };

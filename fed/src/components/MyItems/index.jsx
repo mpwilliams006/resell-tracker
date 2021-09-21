@@ -82,7 +82,6 @@ const MyItems = () => {
         setValue('itemId', value);
       } else {
         setValue(key, value);
-        console.log(`${key}`);
       }
     }
     setCurrentItem(item);

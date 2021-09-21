@@ -63,12 +63,18 @@ const PrimaryNav = () => {
   const [prevNavItems, setPrevNavItems] = useState([]);
   const homeAnchor = { href: "/signin", text: 'Sign In' };
   const myItems = { href: "/my-items", text: useGlobalState.state.user.discordHandle };
+  useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem('user')));
+    const user = JSON.parse(localStorage.getItem('user'));
+    useGlobalState.updateState(user);
+    console.log(useGlobalState.state.user);
+  }, []);
 
   //Our button can take an href or a clickEvent attribute
   const opts = {};
   opts['href'] = '/signup';
   opts['clickEvent'] = () => { console.log('clicked') };
-  console.log(useGlobalState);
+
 
   const handleClick = () => {
     setMobileNav(!mobileNav)

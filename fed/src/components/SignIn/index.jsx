@@ -24,6 +24,7 @@ const SignIn = () => {
           "id=" + response.data.user._id + ";" + expires + ";path=/";
         console.log(response); // JSON data parsed by `data.json()` call
         useGlobalState.updateState({ user: response.data.user })
+        localStorage.setItem('user', JSON.stringify(response.data.user));
       }).then(() => {
         history.push('/all-items');
       });

@@ -110,7 +110,7 @@ exports.updateItem = catchAsync(async (req, res, next) => {
     .limitFields()
     .paginate();
   const items = await features.query;
-  console.log(items);
+
   // SEND RESPONSE
   res.status(200)
     .json({

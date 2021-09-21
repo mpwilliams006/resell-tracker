@@ -37,7 +37,6 @@ const AllItems = () => {
     console.log(itemsToReduce);
     itemsToReduce.forEach(a => {
       a.items.map((items) => {
-        console.log(a);
         reducedItems.push({ ...items, discordHandle: a.discordHandle })
       })
 
